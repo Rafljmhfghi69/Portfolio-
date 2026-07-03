@@ -12,6 +12,48 @@
   ).matches;
 
   /* ---------------------------------------------------------------------
+     0. Onboarding banner — plain-language helper for non-technical visitors
+     ------------------------------------------------------------------- */
+  var banner = document.getElementById("onboard-banner");
+  var bannerClose = document.getElementById("onboard-close");
+  var root = document.documentElement;
+
+  function syncBannerHeight() {
+    if (banner && !banner.classList.contains("is-hidden")) {
+      root.style.setProperty("--banner-h", banner.offsetHeight + "px");
+    } else {
+      root.style.setProperty("--banner-h", "0px");
+    }
+  }
+
+  if (banner && bannerClose) {
+    var dismissed = false;
+    try {
+      dismissed = localStorage.getItem("portfolio-banner-dismissed") === "1";
+    } catch (e) {
+      dismissed = false;
+    }
+
+    if (dismissed) {
+      banner.classList.add("is-hidden");
+    }
+
+    bannerClose.addEventListener("click", function () {
+      banner.classList.add("is-hidden");
+      try {
+        localStorage.setItem("portfolio-banner-dismissed", "1");
+      } catch (e) {
+        /* ignore */
+      }
+      setTimeout(syncBannerHeight, 350);
+    });
+
+    window.addEventListener("resize", syncBannerHeight);
+    window.addEventListener("load", syncBannerHeight);
+    syncBannerHeight();
+  }
+
+  /* ---------------------------------------------------------------------
      1. Terminal typing sequence (about.md hero)
      ------------------------------------------------------------------- */
   var termBody = document.getElementById("term-body");
@@ -241,13 +283,13 @@
       var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!name || !email || !message) {
-        formStatus.textContent = "error: all fields required";
+        formStatus.textContent = "Please fill in every field before sending.";
         formStatus.style.color = "#f14c4c";
         return;
       }
 
       if (!emailPattern.test(email)) {
-        formStatus.textContent = "error: invalid email format";
+        formStatus.textContent = "That email address doesn't look right — please check it.";
         formStatus.style.color = "#f14c4c";
         return;
       }
@@ -263,7 +305,7 @@
         "mailto:" + mailLink + "?subject=" + subject + "&body=" + body;
 
       formStatus.style.color = "#7ee787";
-      formStatus.textContent = "$ mail client opened — thanks for writing.";
+      formStatus.textContent = "Opening your email app now — thanks for writing!";
       contactForm.reset();
     });
   }

@@ -31,31 +31,34 @@
   </div>
 
   <div class="app">
+    <div class="onboard-banner" id="onboard-banner">
+      <span>👋 <strong>No coding knowledge needed.</strong> This page is just styled like a code editor for fun — click a name on the left, or scroll down, to read about me.</span>
+      <button class="onboard-close" id="onboard-close" aria-label="Dismiss this message" type="button">&times;</button>
+    </div>
 
     <!-- ============ Sidebar / file explorer ============ -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-section-label">Explorer</div>
       <nav class="file-tree" id="file-tree">
         <a href="#about-md" class="file-item is-active" data-file="about-md">
-          <span class="file-icon icon-md">◆</span> about.md
+          <span class="file-icon icon-md">◆</span> about.md <span class="file-plain">— About Me</span>
         </a>
         <a href="#journey-log" class="file-item" data-file="journey-log">
-          <span class="file-icon icon-log">▤</span> journey.log
+          <span class="file-icon icon-log">▤</span> journey.log <span class="file-plain">— My Story</span>
         </a>
         <a href="#skills-json" class="file-item" data-file="skills-json">
-          <span class="file-icon icon-json">{ }</span> skills.json
+          <span class="file-icon icon-json">{ }</span> skills.json <span class="file-plain">— Skills</span>
         </a>
         <a href="#projects-dir" class="file-item" data-file="projects-dir">
-          <span class="file-icon icon-dir">▸</span> projects/
+          <span class="file-icon icon-dir">▸</span> projects/ <span class="file-plain">— My Work</span>
         </a>
         <a href="#contact-sh" class="file-item" data-file="contact-sh">
-          <span class="file-icon icon-sh">$</span> contact.sh
+          <span class="file-icon icon-sh">$</span> contact.sh <span class="file-plain">— Contact</span>
         </a>
       </nav>
       <div class="sidebar-git">
-        <div>on <strong>branch</strong> main</div>
-        <div>status: <strong>in progress</strong></div>
-        <div>untracked: 1 (next-project)</div>
+        <div>Status: <strong>in progress</strong></div>
+        <div>Next up: a new project</div>
       </div>
     </aside>
 
@@ -65,11 +68,11 @@
       <!-- Tab bar -->
       <div class="tabbar">
         <button class="mobile-menu-btn" id="menu-btn" aria-label="Toggle file explorer">☰</button>
-        <a href="#about-md" class="tab is-active" data-file="about-md"><span class="file-icon icon-md">◆</span> about.md</a>
-        <a href="#journey-log" class="tab" data-file="journey-log"><span class="file-icon icon-log">▤</span> journey.log</a>
-        <a href="#skills-json" class="tab" data-file="skills-json"><span class="file-icon icon-json">{ }</span> skills.json</a>
-        <a href="#projects-dir" class="tab" data-file="projects-dir"><span class="file-icon icon-dir">▸</span> index.tsx</a>
-        <a href="#contact-sh" class="tab" data-file="contact-sh"><span class="file-icon icon-sh">$</span> contact.sh</a>
+        <a href="#about-md" class="tab is-active" data-file="about-md"><span class="file-icon icon-md">◆</span> About Me</a>
+        <a href="#journey-log" class="tab" data-file="journey-log"><span class="file-icon icon-log">▤</span> My Story</a>
+        <a href="#skills-json" class="tab" data-file="skills-json"><span class="file-icon icon-json">{ }</span> Skills</a>
+        <a href="#projects-dir" class="tab" data-file="projects-dir"><span class="file-icon icon-dir">▸</span> My Work</a>
+        <a href="#contact-sh" class="tab" data-file="contact-sh"><span class="file-icon icon-sh">$</span> Contact</a>
       </div>
 
       <main>
@@ -92,13 +95,13 @@
               </div>
             </div>
 
-            <h1 class="md-h1 reveal" style="--d:60ms"># Abu&ndash;Huraira</h1>
+            <h1 class="md-h1 reveal" style="--d:60ms">Abu&ndash;Huraira</h1>
             <p class="prose reveal" style="--d:100ms">
-              <span class="cm"># 19 years old. Undergraduate. Self-taught.</span><br />
-              <span class="cm"># Currently learning to build with AI-assisted development tools.</span>
+              19 years old. Undergraduate. Self-taught.<br />
+              Currently learning to build with AI-assisted development tools.
             </p>
 
-            <h2 class="md-h2 reveal">## Why this reads like a README</h2>
+            <h2 class="md-h2 reveal">Why I'm being this upfront</h2>
             <p class="prose reveal">
               Because that's honestly what this is. I don't have a long résumé
               of finished, client-tested work &mdash; what I have is momentum,
@@ -114,10 +117,10 @@
               a project, breaking it into steps, and actually shipping it.
             </p>
 
-            <h2 class="md-h2 reveal">## Status</h2>
+            <h2 class="md-h2 reveal">Right now</h2>
             <p class="prose reveal">
-              <span class="kw">const</span> <span class="var">status</span> <span class="punct">=</span> <span class="str">"open to opportunities"</span><span class="punct">;</span><br />
-              <span class="kw">const</span> <span class="var">looking_for</span> <span class="punct">=</span> <span class="punct">[</span><span class="str">"internship"</span><span class="punct">,</span> <span class="str">"entry-level role"</span><span class="punct">,</span> <span class="str">"collaboration"</span><span class="punct">];</span>
+              <strong>Status:</strong> open to opportunities.<br />
+              <strong>Looking for:</strong> an internship, an entry-level role, or a collaboration.
             </p>
           </div>
         </section>
@@ -130,33 +133,29 @@
             <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
           </div>
           <div class="code">
-            <p class="prose reveal" style="margin-bottom:2rem;"><span class="cm">$ git log --oneline --decorate --graph</span></p>
+            <p class="prose reveal" style="margin-bottom:2rem;">A quick timeline of how I got here &mdash; kept honest on purpose.</p>
 
             <div class="commit reveal">
-              <div><span class="commit-hash">commit a1</span><span class="commit-refs">(2024)</span></div>
-              <div class="commit-meta">Author: Abu-Huraira &lt;undergraduate&gt;</div>
-              <div class="commit-msg">finish school, no fixed roadmap yet</div>
+              <div><span class="commit-hash">2024</span></div>
+              <div class="commit-msg">Finished school, no fixed roadmap yet</div>
               <div class="commit-body">Stepped into an open period. Spent time exploring instead of committing early to a path that didn't feel true yet.</div>
             </div>
 
             <div class="commit reveal" style="--d:80ms">
-              <div><span class="commit-hash">commit b2</span><span class="commit-refs">(2024&ndash;25)</span></div>
-              <div class="commit-meta">Author: Abu-Huraira &lt;undergraduate&gt;</div>
-              <div class="commit-msg">explore, and rule things out</div>
+              <div><span class="commit-hash">2024&ndash;25</span></div>
+              <div class="commit-msg">Explored, and ruled things out</div>
               <div class="commit-body">Tried a handful of online spaces, including crypto/airdrop projects. Useful lessons, not a direction worth building a future around.</div>
             </div>
 
             <div class="commit is-head reveal" style="--d:160ms">
-              <div><span class="commit-hash">commit c3</span><span class="commit-refs">(HEAD -&gt; main, now)</span></div>
-              <div class="commit-meta">Author: Abu-Huraira &lt;undergraduate&gt;</div>
-              <div class="commit-msg">start building with AI-assisted tools, on purpose</div>
+              <div><span class="commit-hash">Now</span><span class="commit-refs">current</span></div>
+              <div class="commit-msg">Building with AI-assisted tools, on purpose</div>
               <div class="commit-body">Learning to plan, structure, and ship real projects. This site being the clearest example so far &mdash; slow, deliberate, and actually mine.</div>
             </div>
 
             <div class="commit reveal" style="--d:240ms">
-              <div><span class="commit-hash">commit d4</span><span class="commit-refs">(next, unreleased)</span></div>
-              <div class="commit-meta">Author: Abu-Huraira &lt;undergraduate&gt;</div>
-              <div class="commit-msg">looking for a way in</div>
+              <div><span class="commit-hash">Next</span></div>
+              <div class="commit-msg">Looking for a way in</div>
               <div class="commit-body">An internship, an entry-level role, or a collaboration &mdash; something that turns self-directed momentum into real-world practice.</div>
             </div>
           </div>
@@ -171,27 +170,35 @@
             <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
             <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
           </div>
-          <div class="code json-block">
-            <span class="json-comment-note reveal">// no invented percentages here &mdash; just what's actually true</span>
-            <span class="json-line reveal"><span class="punct">{</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="var">"currently_learning"</span><span class="punct">:</span> <span class="punct">[</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"AI-assisted development"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"HTML / CSS / JavaScript, through real projects"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"Prompt &amp; problem decomposition"</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="punct">],</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="var">"comfortable_with"</span><span class="punct">:</span> <span class="punct">[</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"reading docs and figuring things out unsupervised"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"starting from zero with a new tool"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"breaking unfamiliar problems into small steps"</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="punct">],</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="var">"traits"</span><span class="punct">:</span> <span class="punct">[</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"follow-through"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"adaptable"</span><span class="punct">,</span></span>
-            <span class="json-line json-indent-2 reveal"><span class="str">"honest about what I don't know yet"</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="punct">],</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="var">"skill_bars"</span><span class="punct">:</span> <span class="kw">null</span><span class="punct">,</span> <span class="cm">// on purpose</span></span>
-            <span class="json-line json-indent-1 reveal"><span class="var">"fabricated_testimonials"</span><span class="punct">:</span> <span class="kw">false</span></span>
-            <span class="json-line reveal"><span class="punct">}</span></span>
+          <div class="code">
+            <p class="prose reveal" style="margin-bottom: 1.75rem;">No invented percentages or skill bars here &mdash; just what's actually true.</p>
+
+            <div class="skill-plain-group reveal">
+              <h3 class="skill-plain-label">Currently learning</h3>
+              <ul class="skill-plain-list">
+                <li>AI-assisted development</li>
+                <li>HTML / CSS / JavaScript, through real projects</li>
+                <li>Breaking problems into clear steps</li>
+              </ul>
+            </div>
+
+            <div class="skill-plain-group reveal" style="--d:80ms">
+              <h3 class="skill-plain-label">Comfortable with</h3>
+              <ul class="skill-plain-list">
+                <li>Reading documentation and figuring things out on my own</li>
+                <li>Starting from zero with a brand-new tool</li>
+                <li>Breaking unfamiliar problems into small steps</li>
+              </ul>
+            </div>
+
+            <div class="skill-plain-group reveal" style="--d:160ms">
+              <h3 class="skill-plain-label">How I work</h3>
+              <ul class="skill-plain-list">
+                <li>Follow-through &mdash; I finish what I start</li>
+                <li>Adaptable &mdash; comfortable learning new things quickly</li>
+                <li>Honest about what I don't know yet</li>
+              </ul>
+            </div>
           </div>
         </section>
 
@@ -203,7 +210,7 @@
             <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
           </div>
           <div class="code">
-            <p class="prose reveal" style="margin-bottom:2rem;"><span class="cm">// ls -la ./projects</span></p>
+            <p class="prose reveal" style="margin-bottom:2rem;">Things I've actually built, listed honestly by status.</p>
 
             <div class="project-block reveal">
               <div class="project-block-head">
@@ -252,8 +259,7 @@
           </div>
           <div class="code">
             <p class="prose reveal" style="margin-bottom:1.75rem;">
-              <span class="kw">#!/bin/bash</span><br />
-              <span class="cm"># run this script to reach me</span>
+              Fill in the form below, or use the links underneath it &mdash; whichever is easier.
             </p>
 
             <div class="shell-window reveal">
@@ -274,14 +280,14 @@
                   <label for="message" class="shell-field-label">message</label>
                   <textarea id="message" name="message" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="shell-run-btn">./send.sh</button>
+                <button type="submit" class="shell-run-btn">Send Message</button>
                 <p class="shell-status" id="form-status"></p>
               </form>
 
               <div class="contact-links-inline" style="padding: 0 1.5rem 1.5rem;">
-                <a href="mailto:youremail@example.com"># email &rarr; youremail@example.com</a>
-                <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer"># github &rarr; @Rafljmhfghi69</a>
-                <a href="#"># linkedin &rarr; add your profile link</a>
+                <a href="mailto:youremail@example.com">Email &rarr; youremail@example.com</a>
+                <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer">GitHub &rarr; @Rafljmhfghi69</a>
+                <a href="#">LinkedIn &rarr; add your profile link</a>
               </div>
             </div>
           </div>
