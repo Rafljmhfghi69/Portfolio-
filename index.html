@@ -3,166 +3,445 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abu-Huraira | Portfolio</title>
-  <meta name="description" content="Abu-Huraira - Aspiring Developer & AI Enthusiast. Self-taught, curious, and building with AI-assisted tools." />
-  <link rel="stylesheet" href="style.css" />
+  <title>Abu-Huraira — Aspiring Developer &amp; AI-Assisted Builder</title>
+  <meta name="description" content="Portfolio of Abu-Huraira, a 19-year-old self-taught tech enthusiast learning to build with AI-assisted development tools." />
+  <meta name="theme-color" content="#05070d" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Abu-Huraira — Portfolio" />
+  <meta property="og:description" content="Self-taught, curious, and building with AI-assisted tools." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon (inline SVG, no external asset needed) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2334e0d8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2305070d'/%3E%3Ctext x='50' y='68' font-size='58' font-family='Arial' font-weight='700' fill='url(%23g)' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- ============ Preloader ============ -->
+  <div class="preloader" aria-hidden="true">
+    <span class="preloader-mark">Abu-Huraira</span>
+    <div class="preloader-bar"><span></span></div>
+  </div>
+
+  <!-- ============ Custom cursor ============ -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-ring"></div>
+
+  <!-- ============ Scroll progress ============ -->
+  <div class="scroll-progress"></div>
+
+  <!-- ============ Navbar ============ -->
   <header class="navbar">
-    <div class="nav-container">
-      <a href="#home" class="logo">Abu<span>-Huraira</span></a>
+    <div class="nav-inner">
+      <a href="#home" class="logo"><span class="logo-dot"></span>Abu-Huraira</a>
+
       <nav>
         <ul class="nav-links" id="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#journey" class="nav-link">Journey</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
       </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- ============ Hero ============ -->
   <section id="home" class="hero">
-    <div class="hero-content">
-      <p class="hero-greeting">Hello, I'm</p>
-      <h1 class="hero-name">Abu-Huraira</h1>
-      <h2 class="hero-title">Aspiring Developer &amp; AI Enthusiast</h2>
-      <p class="hero-text">
-        19 years old. HSC graduate (2024). Self-taught and currently exploring
-        the world of AI-assisted development &mdash; learning by building.
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-glow"></div>
+    <div class="hero-glow-secondary"></div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow reveal">Open to opportunities</p>
+        <h1 class="hero-title reveal" style="--d:80ms">
+          Hi, I'm <span class="gradient-text">Abu-Huraira</span>
+        </h1>
+        <div class="hero-role-line reveal" style="--d:160ms">
+          <span>I'm an</span>
+          <span id="typed-role"></span><span class="type-cursor"></span>
+        </div>
+        <p class="hero-text reveal" style="--d:240ms">
+          19 years old, HSC graduate (2024), and self-taught in the truest
+          sense — currently exploring AI-assisted development and learning
+          to build real things by actually building them. This site is the
+          first one.
+        </p>
+        <div class="hero-actions reveal" style="--d:320ms">
+          <a href="#projects" class="btn btn-primary magnetic">View My Work</a>
+          <a href="#contact" class="btn btn-ghost magnetic">Get In Touch</a>
+        </div>
+        <div class="hero-meta reveal" style="--d:400ms">
+          <div class="hero-meta-item">
+            <span class="hero-meta-num">2024</span>
+            <span class="hero-meta-label">HSC Completed</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-num">19</span>
+            <span class="hero-meta-label">Years Old</span>
+          </div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-num">01</span>
+            <span class="hero-meta-label">Project Shipped</span>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <div class="scroll-cue-line"></div>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- ============ Marquee strip ============ -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span>SELF-TAUGHT</span><span>AI-ASSISTED DEVELOPMENT</span><span>CURIOUS BY DEFAULT</span><span>LEARNING IN PUBLIC</span><span>BUILT WITH KIRO</span>
+      <span>SELF-TAUGHT</span><span>AI-ASSISTED DEVELOPMENT</span><span>CURIOUS BY DEFAULT</span><span>LEARNING IN PUBLIC</span><span>BUILT WITH KIRO</span>
+    </div>
+  </div>
+
+  <!-- ============ About ============ -->
   <section id="about" class="section">
-    <div class="section-container">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <p>
-          I'm Abu-Huraira, a 19-year-old based on a journey of self-discovery
-          through technology. I completed my HSC in 2024, and since then I've
-          been exploring different paths on my own &mdash; from dabbling in
-          online spaces to now focusing seriously on learning how to build
-          things with the help of AI tools.
-        </p>
-        <p>
-          I don't come from a traditional tech background, and I'm still early
-          in my journey &mdash; but I'm curious, adaptable, and genuinely
-          enjoy figuring things out by doing. This portfolio itself is a
-          product of that process: built step by step while learning.
-        </p>
-        <p>
-          I'm currently looking for opportunities to learn, grow, and
-          contribute &mdash; whether that's an internship, an entry-level
-          role, or a chance to collaborate on something interesting.
-        </p>
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">About</p>
+        <h2 class="section-title">Starting from zero, on purpose.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm Abu-Huraira — a 19-year-old who finished HSC in 2024 and
+            then took a path that didn't look like a straight line. Instead
+            of following a fixed plan, I spent time exploring different
+            corners of the internet, experimenting, and figuring out what
+            actually held my attention.
+          </p>
+          <p>
+            What stuck was <strong>building things with AI-assisted tools</strong>.
+            I don't come from a formal computer science background — everything
+            here is self-directed, learned by doing, breaking things, and
+            trying again. This portfolio itself is proof of that process:
+            planned, built, and refined step by step.
+          </p>
+          <p>
+            I'm not pretending to be an expert. I'm early, honest about it,
+            and moving with real momentum. Right now I'm looking for
+            opportunities — an internship, an entry-level role, or a
+            collaboration — where that momentum can turn into something
+            bigger.
+          </p>
+        </div>
+
+        <div class="about-card reveal" style="--d:120ms">
+          <div class="about-card-row">
+            <span>Name</span>
+            <span>Abu-Huraira</span>
+          </div>
+          <div class="about-card-row">
+            <span>Age</span>
+            <span>19</span>
+          </div>
+          <div class="about-card-row">
+            <span>Education</span>
+            <span>HSC, 2024</span>
+          </div>
+          <div class="about-card-row">
+            <span>Status</span>
+            <span>Open to opportunities</span>
+          </div>
+          <div class="about-card-row">
+            <span>Focus</span>
+            <span>AI-assisted development</span>
+          </div>
+          <div class="about-card-row">
+            <span>Approach</span>
+            <span>Self-taught / learning in public</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section id="skills" class="section section-alt">
-    <div class="section-container">
-      <h2 class="section-title">Skills &amp; Focus Areas</h2>
-      <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">🤖</div>
-          <h3>AI-Assisted Development</h3>
-          <p>Learning to design, build, and ship projects using modern AI-powered tools.</p>
+  <!-- ============ Journey / Timeline ============ -->
+  <section id="journey" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Journey</p>
+        <h2 class="section-title">How I got here.</h2>
+        <p class="section-desc">
+          Not a conventional resume — a real, honest timeline of what actually happened.
+        </p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <span class="timeline-year">2024</span>
+          <h3>Completed HSC</h3>
+          <p>Finished higher secondary education and stepped into an open-ended period with no fixed roadmap yet.</p>
         </div>
-        <div class="skill-card">
-          <div class="skill-icon">💻</div>
-          <h3>Web Fundamentals</h3>
-          <p>Building a foundation in HTML, CSS, and JavaScript through hands-on projects.</p>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <span class="timeline-year">2024 — 2025</span>
+          <h3>Explored, experimented, learned what didn't fit</h3>
+          <p>Spent time exploring different online spaces, including short-lived crypto/airdrop projects. Useful for learning how things work — but it didn't feel like a direction worth building a future on.</p>
         </div>
-        <div class="skill-card">
-          <div class="skill-icon">📚</div>
-          <h3>Self-Directed Learning</h3>
-          <p>Comfortable teaching myself new tools and concepts without formal guidance.</p>
+
+        <div class="timeline-item is-active">
+          <span class="timeline-dot"></span>
+          <span class="timeline-year">Now</span>
+          <h3>Building with AI-assisted development</h3>
+          <p>Actively learning how to design, plan, and ship real projects using modern AI-powered tools — starting with this portfolio, built from scratch.</p>
         </div>
-        <div class="skill-card">
-          <div class="skill-icon">⚡</div>
-          <h3>Adaptability</h3>
-          <p>Quick to pick up new tools and workflows, and not afraid to start from zero.</p>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <span class="timeline-year">Next</span>
+          <h3>Looking for a way in</h3>
+          <p>Seeking an internship, entry-level role, or collaboration to turn self-directed learning into real-world experience.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- ============ Skills ============ -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Skills &amp; Focus</p>
+        <h2 class="section-title">What I'm building, and how.</h2>
+        <p class="section-desc">
+          I'm early in my journey, so instead of inflating a skill list, here's
+          honestly where my time and energy are going right now.
+        </p>
+      </div>
+
+      <div class="skills-layout">
+        <div class="skill-card reveal-scale">
+          <div class="skill-card-inner">
+            <span class="skill-icon">🤖</span>
+            <h3>AI-Assisted Development</h3>
+            <p>Learning to plan, design, and ship real projects using AI-powered development tools like this one.</p>
+            <div class="skill-bar"><span data-fill="70"></span></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal-scale" style="--d:100ms">
+          <div class="skill-card-inner">
+            <span class="skill-icon">💻</span>
+            <h3>Web Fundamentals</h3>
+            <p>Building a working foundation in HTML, CSS, and JavaScript through hands-on, real projects.</p>
+            <div class="skill-bar"><span data-fill="55"></span></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal-scale" style="--d:200ms">
+          <div class="skill-card-inner">
+            <span class="skill-icon">📚</span>
+            <h3>Self-Directed Learning</h3>
+            <p>Comfortable figuring things out without formal guidance — reading docs, testing, and iterating.</p>
+            <div class="skill-bar"><span data-fill="85"></span></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal-scale" style="--d:300ms">
+          <div class="skill-card-inner">
+            <span class="skill-icon">🧠</span>
+            <h3>Problem Solving</h3>
+            <p>Breaking down unfamiliar problems into small, manageable steps instead of getting stuck.</p>
+            <div class="skill-bar"><span data-fill="65"></span></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal-scale" style="--d:400ms">
+          <div class="skill-card-inner">
+            <span class="skill-icon">⚡</span>
+            <h3>Adaptability</h3>
+            <p>Quick to pick up new tools and workflows, and genuinely comfortable starting from zero.</p>
+            <div class="skill-bar"><span data-fill="80"></span></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal-scale" style="--d:500ms">
+          <div class="skill-card-inner">
+            <span class="skill-icon">🎯</span>
+            <h3>Consistency</h3>
+            <p>Showing up and building even without external pressure — this project is the evidence.</p>
+            <div class="skill-bar"><span data-fill="60"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-tag-cloud reveal">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Git &amp; GitHub</span>
+        <span class="skill-tag">AI Tools</span>
+        <span class="skill-tag">Prompt Design</span>
+        <span class="skill-tag">Responsive Design</span>
+        <span class="skill-tag">Problem Solving</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Projects ============ -->
   <section id="projects" class="section">
-    <div class="section-container">
-      <h2 class="section-title">Projects</h2>
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Projects</p>
+        <h2 class="section-title">Things I've built.</h2>
+        <p class="section-desc">Small list for now — growing on purpose, one real project at a time.</p>
+      </div>
+
       <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-info">
+        <div class="project-card reveal">
+          <div>
+            <span class="project-index">01 / Featured</span>
             <h3>This Portfolio Website</h3>
             <p>
-              A personal portfolio built from scratch with HTML, CSS, and
-              JavaScript &mdash; designed and developed with AI-assisted
-              tools as my first real project.
+              A fully custom personal portfolio — planned, structured, and built
+              from scratch with HTML, CSS, and JavaScript, using AI-assisted
+              development as my primary learning tool. No templates, no frameworks.
             </p>
             <div class="project-tags">
-              <span>HTML</span>
-              <span>CSS</span>
+              <span>HTML5</span>
+              <span>CSS3</span>
               <span>JavaScript</span>
+              <span>Canvas API</span>
             </div>
-            <a href="https://github.com/Rafljmhfghi69/Portfolio-" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub &rarr;</a>
           </div>
+          <a href="https://github.com/Rafljmhfghi69/Portfolio-" target="_blank" rel="noopener noreferrer" class="project-link">
+            View on GitHub
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
         </div>
-        <div class="project-card project-card-placeholder">
-          <div class="project-info">
-            <h3>More Coming Soon</h3>
-            <p>
-              I'm actively learning and building. New projects will be added
-              here as I complete them &mdash; check back soon!
-            </p>
+
+        <div class="project-card is-placeholder reveal" style="--d:120ms">
+          <div>
+            <span class="project-index">02 / Coming Soon</span>
+            <h3>The Next One</h3>
+            <p>Actively learning and building — new projects will land here as they're completed. Check back soon.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section section-alt">
-    <div class="section-container">
-      <h2 class="section-title">Get In Touch</h2>
-      <p class="contact-intro">
-        I'm open to opportunities, collaborations, or just a conversation.
-        Feel free to reach out!
-      </p>
-      <div class="contact-links">
-        <a href="mailto:youremail@example.com" class="contact-link">
-          <span class="contact-icon">✉️</span> youremail@example.com
-        </a>
-        <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer" class="contact-link">
-          <span class="contact-icon">🐙</span> GitHub
-        </a>
-        <a href="#" class="contact-link">
-          <span class="contact-icon">💼</span> LinkedIn
-        </a>
+  <!-- ============ Philosophy ============ -->
+  <section class="philosophy">
+    <div class="container">
+      <blockquote class="reveal">
+        "I'd rather start <span class="gradient-text">honestly at zero</span> than pretend to be somewhere I'm not."
+      </blockquote>
+      <cite class="reveal" style="--d:100ms">— Abu-Huraira</cite>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Let's talk.</h2>
+        <p class="section-desc">
+          Open to opportunities, collaborations, or just a good conversation. Reach out below.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <form class="contact-form reveal" id="contact-form" data-mailto="youremail@example.com">
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="What's on your mind?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary magnetic" style="align-self:flex-start;">Send Message</button>
+          <p class="form-status" id="form-status"></p>
+        </form>
+
+        <div class="contact-links reveal" style="--d:150ms">
+          <a href="mailto:youremail@example.com" class="contact-link-card">
+            <span class="contact-link-icon">✉️</span>
+            <span>
+              <span class="contact-link-label">Email</span><br />
+              <span class="contact-link-value">youremail@example.com</span>
+            </span>
+          </a>
+          <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer" class="contact-link-card">
+            <span class="contact-link-icon">🐙</span>
+            <span>
+              <span class="contact-link-label">GitHub</span><br />
+              <span class="contact-link-value">@Rafljmhfghi69</span>
+            </span>
+          </a>
+          <a href="#" class="contact-link-card">
+            <span class="contact-link-icon">💼</span>
+            <span>
+              <span class="contact-link-label">LinkedIn</span><br />
+              <span class="contact-link-value">Add your profile link</span>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ============ Footer ============ -->
   <footer class="footer">
-    <p>&copy; <span id="year"></span> Abu-Huraira. Built with HTML, CSS &amp; JavaScript.</p>
+    <div class="container footer-inner">
+      <p class="footer-text">&copy; <span id="year"></span> Abu-Huraira. Built by hand, with AI-assisted tools.</p>
+      <div class="footer-socials">
+        <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.78 1.2 1.78 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.72-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 015.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.4-5.27 5.69.41.36.78 1.08.78 2.18 0 1.58-.01 2.85-.01 3.24 0 .3.2.66.79.55A11.5 11.5 0 0023.5 12c0-6.35-5.15-11.5-11.5-11.5z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.44-2.14 2.94v5.66H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM3.56 20.45h3.56V9H3.56v11.45z"/></svg>
+        </a>
+        <a href="mailto:youremail@example.com" aria-label="Email">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        </a>
+      </div>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
