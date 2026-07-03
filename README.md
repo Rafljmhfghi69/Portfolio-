@@ -1,41 +1,48 @@
-# Abu&ndash;Huraira — A Working Notebook (Issue N&deg;01)
+# abu-huraira — ~/portfolio
 
-A personal site built as an editorial "notebook" rather than a conventional
-tech portfolio &mdash; no gradients, no glassmorphism, no rounded cards, no
-skill-percentage bars. Plain HTML, CSS, and JavaScript. No frameworks, no
-build tools, no dependencies to install.
+A personal site presented as a **code editor**, not a conventional
+portfolio. Plain HTML, CSS, and JavaScript &mdash; no frameworks, no build
+tools, no dependencies to install.
 
 ## Concept
 
-Most developer portfolios share the same shape: hero, glass cards, a grid
-of skills with progress bars, a projects grid. This one intentionally
-avoids that shape. It's designed like a printed notebook or zine:
+Instead of a hero-and-cards layout, the whole page is styled like an open
+VS Code window:
 
-- A rotated **spine** running down the left edge, like a book spine
-- A **page rail** on the right tracking which "entry" you're currently on
-- A sticky **masthead** instead of a floating navbar
-- **Drop caps**, a **dot-leader table of contents**, and a **numbered
-  glossary** of capabilities instead of animated skill bars
-- Projects presented as **plates** with generative CSS halftone/line
-  textures &mdash; no stock photography, no hotlinked images
-- A **custom cursor with a contextual text label** ("Read", "Open", "Send")
-  that changes depending on what you're hovering
-- Ink-on-paper color palette (`#f3efe7` paper, `#111110` ink, `#c0311a`
-  accent) with a subtle film-grain overlay
+- A **fake OS title bar** (red/yellow/green dots) at the top
+- A **file explorer sidebar** with real "files": `about.md`, `journey.log`,
+  `skills.json`, `projects/`, `contact.sh`
+- A **tab bar** mirroring the sidebar, with the active tab highlighted as
+  you scroll
+- **Line-numbered gutters** next to every section, like an actual editor
+  pane
+- A **live-typing terminal** in `about.md` that runs commands (`whoami`,
+  `cat status.txt`) to introduce the page
+- **`journey.log`** presented as a `git log --oneline --decorate --graph`
+  output, with real commit-style entries instead of a visual timeline
+- **`skills.json`** as an actual JSON object &mdash; explicitly including
+  `"skill_bars": null // on purpose` and `"fabricated_testimonials": false`
+  instead of invented percentage bars
+- **`projects/`** shown as diff-style blocks with status badges (`live`,
+  `in progress`, `planned`)
+- **`contact.sh`** as a terminal window containing a real form, with a
+  `./send.sh` button
+- A **VS Code&ndash;style status bar** pinned to the bottom (`⎇ main`,
+  current file, `UTF-8`)
 
-Content is deliberately honest: no invented skill percentages, no
-fabricated testimonials, no exaggerated bio. It reads like a notebook
-because that's what it actually is.
+Content is intentionally honest: no invented skill percentages, no
+fabricated testimonials, no exaggerated bio &mdash; `skills.json` says so
+directly.
 
 ## Structure
 
 ```
 Portfolio-/
-├── index.html         # All page markup and content
+├── index.html         # All page markup: titlebar, sidebar, tabs, 5 panes
 ├── css/
-│   └── style.css      # Full design system: layout, type, components
+│   └── style.css      # Full editor/terminal design system + syntax colors
 ├── js/
-│   └── main.js         # Cursor label, section rail, reveal-on-scroll, contact form
+│   └── main.js         # Terminal typing sequence, tab sync, reveal, contact form
 └── README.md
 ```
 
@@ -59,22 +66,25 @@ Then visit `http://localhost:8000`.
 
 ## Customizing
 
-- **Content** — all copy lives directly in `index.html` (Cover, Profile,
-  Log, Capabilities, Works, Stance, Colophon)
+- **Content** — all copy lives directly in `index.html`, organized by
+  `data-file` sections: `about-md`, `journey-log`, `skills-json`,
+  `projects-dir`, `contact-sh`
 - **Contact info** — replace the placeholder email (`youremail@example.com`)
-  and the LinkedIn `#` link in the Colophon section, and update the
+  and the LinkedIn `#` link in the `contact-sh` section, and update the
   `data-mailto` attribute on `#contact-form`
-- **Palette** — edit the CSS variables at the top of `css/style.css`
-  (`--paper`, `--ink`, `--accent`)
-- **Works/projects** — duplicate a `.work-item` block as new projects are
-  actually finished; swap the `plate-1/2/3` CSS-pattern classes or add new
-  ones in `css/style.css`
-- **Cursor labels** — add `data-cursor="Your Label"` to any element to give
-  it a custom cursor label on hover (desktop only)
+- **Terminal script** — edit the `termScript` array at the top of
+  `js/main.js` to change what the hero terminal types out
+- **Syntax colors** — edit the `--syn-*` CSS variables at the top of
+  `css/style.css` (VS Code "Dark+" inspired palette)
+- **Projects** — duplicate a `.project-block` in the `projects-dir` section
+  as new projects are actually finished; update the `status-badge` class
+  (`status-live`, `status-progress`, `status-planned`)
 
 ## Accessibility & Performance Notes
 
-- Custom cursor is automatically disabled on touch devices
-- All animations respect `prefers-reduced-motion: reduce`
-- No external image hotlinking — project "plates" are pure CSS patterns
-- Semantic landmarks (`header`, `nav`, `main`, `section`, `footer`) used throughout
+- Terminal typing animation is skipped (renders instantly) when
+  `prefers-reduced-motion: reduce` is set
+- Sidebar collapses to a toggleable menu on narrow viewports
+- No external image hotlinking &mdash; the whole design is typographic/CSS
+- Semantic landmarks (`header`-equivalent titlebar, `aside`, `main`,
+  `section`) used throughout
