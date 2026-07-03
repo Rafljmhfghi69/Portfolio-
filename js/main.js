@@ -1,116 +1,127 @@
 /* =========================================================================
-   ABU-HURAIRA — PORTFOLIO
-   main.js — nav, theme toggle, smooth scroll, contact form, misc UI
+   ABU-HURAIRA — ISSUE N°01
+   main.js — cursor label, section rail, reveal-on-scroll, contact form
    ========================================================================= */
 
 (function () {
   "use strict";
 
-  document.body.classList.add("no-scroll");
+  var isTouch = window.matchMedia("(pointer: coarse)").matches;
+  var prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
   /* ---------------------------------------------------------------------
-     1. Mobile nav toggle
+     1. Custom cursor with contextual label
      ------------------------------------------------------------------- */
-  var navToggle = document.getElementById("nav-toggle");
-  var navLinksWrap = document.getElementById("nav-links");
+  if (!isTouch) {
+    var cursor = document.getElementById("cursor");
+    var cursorLabel = document.getElementById("cursor-label");
 
-  if (navToggle && navLinksWrap) {
-    navToggle.addEventListener("click", function () {
-      navToggle.classList.toggle("is-active");
-      navLinksWrap.classList.toggle("is-active");
-    });
-
-    navLinksWrap.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navToggle.classList.remove("is-active");
-        navLinksWrap.classList.remove("is-active");
+    if (cursor && cursorLabel) {
+      window.addEventListener("mousemove", function (e) {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
       });
-    });
+
+      var labelTargets = document.querySelectorAll("[data-cursor]");
+      labelTargets.forEach(function (el) {
+        el.addEventListener("mouseenter", function () {
+          cursorLabel.textContent = el.getAttribute("data-cursor") || "";
+          cursor.classList.add("is-active");
+        });
+        el.addEventListener("mouseleave", function () {
+          cursor.classList.remove("is-active");
+        });
+      });
+
+      document.addEventListener("mouseleave", function () {
+        cursor.style.opacity = "0";
+      });
+      document.addEventListener("mouseenter", function () {
+        cursor.style.opacity = "1";
+      });
+    }
   }
 
   /* ---------------------------------------------------------------------
-     2. Theme toggle (persisted via localStorage)
+     2. Section rail — ticks reflecting scroll position, clickable
      ------------------------------------------------------------------- */
-  var themeToggle = document.getElementById("theme-toggle");
-  var storedTheme = null;
-  try {
-    storedTheme = localStorage.getItem("portfolio-theme");
-  } catch (e) {
-    storedTheme = null;
-  }
+  var sections = Array.prototype.slice.call(
+    document.querySelectorAll("main section[data-section], section[data-section]")
+  );
+  var rail = document.getElementById("rail");
+  var railCount = document.getElementById("rail-count");
 
-  if (storedTheme) {
-    document.documentElement.setAttribute("data-theme", storedTheme);
-  }
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      var current = document.documentElement.getAttribute("data-theme");
-      var next = current === "light" ? "dark" : "light";
-
-      if (next === "dark") {
-        document.documentElement.removeAttribute("data-theme");
-      } else {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-
-      try {
-        localStorage.setItem("portfolio-theme", next);
-      } catch (e) {
-        /* localStorage unavailable — ignore */
-      }
-    });
-  }
-
-  /* ---------------------------------------------------------------------
-     3. Active nav link highlighting on scroll
-     ------------------------------------------------------------------- */
-  var sections = document.querySelectorAll("section[id]");
-  var navAnchors = document.querySelectorAll(".nav-link");
-
-  function highlightNav() {
-    var currentId = "";
-    sections.forEach(function (section) {
-      var top = section.offsetTop - 140;
-      if (window.scrollY >= top) {
-        currentId = section.getAttribute("id");
-      }
+  if (rail && sections.length) {
+    sections.forEach(function (section, i) {
+      var tick = document.createElement("button");
+      tick.className = "rail-tick";
+      tick.setAttribute(
+        "aria-label",
+        "Go to " + (section.getAttribute("data-section") || "section " + (i + 1))
+      );
+      tick.addEventListener("click", function () {
+        section.scrollIntoView({ behavior: "smooth" });
+      });
+      rail.appendChild(tick);
     });
 
-    navAnchors.forEach(function (anchor) {
-      anchor.classList.remove("is-active");
-      if (anchor.getAttribute("href") === "#" + currentId) {
-        anchor.classList.add("is-active");
-      }
-    });
-  }
-  window.addEventListener("scroll", highlightNav, { passive: true });
-  window.addEventListener("load", highlightNav);
+    var ticks = rail.querySelectorAll(".rail-tick");
 
-  /* ---------------------------------------------------------------------
-     4. Back-to-top button
-     ------------------------------------------------------------------- */
-  var backToTop = document.getElementById("back-to-top");
-  if (backToTop) {
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (window.scrollY > 600) {
-          backToTop.classList.add("is-visible");
-        } else {
-          backToTop.classList.remove("is-visible");
+    function updateRail() {
+      var current = 0;
+      sections.forEach(function (section, i) {
+        var top = section.getBoundingClientRect().top;
+        if (top <= window.innerHeight * 0.5) {
+          current = i;
         }
-      },
-      { passive: true }
-    );
+      });
 
-    backToTop.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      ticks.forEach(function (tick, i) {
+        tick.classList.toggle("is-current", i === current);
+      });
+
+      if (railCount) {
+        var num = String(current + 1).padStart(2, "0");
+        var total = String(sections.length).padStart(2, "0");
+        railCount.textContent = num + " / " + total;
+      }
+    }
+
+    window.addEventListener("scroll", updateRail, { passive: true });
+    window.addEventListener("resize", updateRail);
+    window.addEventListener("load", updateRail);
+    updateRail();
+  }
+
+  /* ---------------------------------------------------------------------
+     3. Reveal-on-scroll via IntersectionObserver
+     ------------------------------------------------------------------- */
+  var revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
+    revealEls.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  } else {
+    revealEls.forEach(function (el) {
+      el.classList.add("is-visible");
     });
   }
 
   /* ---------------------------------------------------------------------
-     5. Contact form — client-side validation + mailto handoff
+     4. Contact form — validation + mailto handoff
      ------------------------------------------------------------------- */
   var contactForm = document.getElementById("contact-form");
   var formStatus = document.getElementById("form-status");
@@ -125,35 +136,35 @@
       var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!name || !email || !message) {
-        formStatus.textContent = "Please fill in all fields.";
-        formStatus.style.color = "#ff5f7a";
+        formStatus.textContent = "— please fill in every field.";
+        formStatus.style.color = "#c0311a";
         return;
       }
 
       if (!emailPattern.test(email)) {
-        formStatus.textContent = "Please enter a valid email address.";
-        formStatus.style.color = "#ff5f7a";
+        formStatus.textContent = "— that email doesn't look right.";
+        formStatus.style.color = "#c0311a";
         return;
       }
 
-      var subject = encodeURIComponent("Portfolio contact from " + name);
+      var subject = encodeURIComponent("Notebook contact from " + name);
       var body = encodeURIComponent(
         message + "\n\n— " + name + " (" + email + ")"
       );
-      var mailLink = contactForm.getAttribute("data-mailto") || "youremail@example.com";
+      var mailLink =
+        contactForm.getAttribute("data-mailto") || "youremail@example.com";
 
       window.location.href =
         "mailto:" + mailLink + "?subject=" + subject + "&body=" + body;
 
       formStatus.style.color = "";
-      formStatus.textContent =
-        "Opening your email client... thanks for reaching out!";
+      formStatus.textContent = "— opening your mail client. Thanks for writing.";
       contactForm.reset();
     });
   }
 
   /* ---------------------------------------------------------------------
-     6. Footer year
+     5. Footer year
      ------------------------------------------------------------------- */
   var yearSpan = document.getElementById("year");
   if (yearSpan) {
