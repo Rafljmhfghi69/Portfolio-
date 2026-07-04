@@ -1,48 +1,44 @@
-# abu-huraira — ~/portfolio
+# Abu&ndash;Huraira — Liner Notes
 
-A personal site presented as a **code editor**, not a conventional
-portfolio. Plain HTML, CSS, and JavaScript &mdash; no frameworks, no build
-tools, no dependencies to install.
+A personal site presented as an **album's liner notes**, not a conventional
+tech portfolio. Plain HTML, CSS, and JavaScript &mdash; no frameworks, no
+build tools, no dependencies to install.
 
 ## Concept
 
-Instead of a hero-and-cards layout, the whole page is styled like an open
-VS Code window:
+A warm, "acoustic" alternative to the cold, digital look of a typical dev
+portfolio:
 
-- A **fake OS title bar** (red/yellow/green dots) at the top
-- A **file explorer sidebar** with real "files": `about.md`, `journey.log`,
-  `skills.json`, `projects/`, `contact.sh`
-- A **tab bar** mirroring the sidebar, with the active tab highlighted as
-  you scroll
-- **Line-numbered gutters** next to every section, like an actual editor
-  pane
-- A **live-typing terminal** in `about.md` that runs commands (`whoami`,
-  `cat status.txt`) to introduce the page
-- **`journey.log`** presented as a `git log --oneline --decorate --graph`
-  output, with real commit-style entries instead of a visual timeline
-- **`skills.json`** as an actual JSON object &mdash; explicitly including
-  `"skill_bars": null // on purpose` and `"fabricated_testimonials": false`
-  instead of invented percentage bars
-- **`projects/`** shown as diff-style blocks with status badges (`live`,
-  `in progress`, `planned`)
-- **`contact.sh`** as a terminal window containing a real form, with a
-  `./send.sh` button
-- A **VS Code&ndash;style status bar** pinned to the bottom (`⎇ main`,
-  current file, `UTF-8`)
+- **Kraft-paper and cream tones** instead of dark mode or bright gradients
+- A **generated waveform** in the hero, gently animating like an idle audio
+  track
+- A **cassette-tape label** sticker in the corner of the hero
+- Content organized like an actual album, track by track:
+  - **Track 01 &mdash; About Me** (liner notes, with a drop-cap opening line)
+  - **Track 02 &mdash; My Story, So Far** (a dated B-side history)
+  - **Track 03 &mdash; Credits** (skills, framed as album credits &mdash; no
+    invented percentages)
+  - **Track 04 &mdash; The Tracklist** (projects, listed like album tracks
+    with status badges: live / in progress / planned)
+  - A liner-note **pull quote**
+  - **Track 05 &mdash; Request a Song** (the contact section)
+- Dashed "perforated" section dividers, tilted sticky-note style cards, and
+  warm serif + hand-lettered display type (Fraunces + Caveat)
+- A friendly, dismissible onboarding banner so non-technical visitors
+  immediately understand it's "just a portfolio dressed up"
 
 Content is intentionally honest: no invented skill percentages, no
-fabricated testimonials, no exaggerated bio &mdash; `skills.json` says so
-directly.
+fabricated testimonials or streaming stats, no exaggerated bio.
 
 ## Structure
 
 ```
 Portfolio-/
-├── index.html         # All page markup: titlebar, sidebar, tabs, 5 panes
+├── index.html         # All page markup and content
 ├── css/
-│   └── style.css      # Full editor/terminal design system + syntax colors
+│   └── style.css      # Full acoustic/warm design system
 ├── js/
-│   └── main.js         # Terminal typing sequence, tab sync, reveal, contact form
+│   └── main.js         # Waveform animation, reveal-on-scroll, contact form
 └── README.md
 ```
 
@@ -67,24 +63,21 @@ Then visit `http://localhost:8000`.
 ## Customizing
 
 - **Content** — all copy lives directly in `index.html`, organized by
-  `data-file` sections: `about-md`, `journey-log`, `skills-json`,
-  `projects-dir`, `contact-sh`
+  section id: `hero`, `about`, `journey`, `skills`, `projects`, `stance`,
+  `contact`
 - **Contact info** — replace the placeholder email (`youremail@example.com`)
-  and the LinkedIn `#` link in the `contact-sh` section, and update the
+  and the LinkedIn `#` link in the `contact` section, and update the
   `data-mailto` attribute on `#contact-form`
-- **Terminal script** — edit the `termScript` array at the top of
-  `js/main.js` to change what the hero terminal types out
-- **Syntax colors** — edit the `--syn-*` CSS variables at the top of
-  `css/style.css` (VS Code "Dark+" inspired palette)
-- **Projects** — duplicate a `.project-block` in the `projects-dir` section
-  as new projects are actually finished; update the `status-badge` class
-  (`status-live`, `status-progress`, `status-planned`)
+- **Palette** — edit the CSS variables at the top of `css/style.css`
+  (`--paper`, `--ink`, `--accent`, `--wave`, `--tape`)
+- **Waveform** — tweak the bar-count and animation parameters in the
+  waveform section of `js/main.js`
+- **Projects** — duplicate a `.track-row` block in the tracklist section as
+  new projects are actually finished; update the `status-*` class
 
 ## Accessibility & Performance Notes
 
-- Terminal typing animation is skipped (renders instantly) when
+- Waveform idle animation is skipped (renders as a static pattern) when
   `prefers-reduced-motion: reduce` is set
-- Sidebar collapses to a toggleable menu on narrow viewports
 - No external image hotlinking &mdash; the whole design is typographic/CSS
-- Semantic landmarks (`header`-equivalent titlebar, `aside`, `main`,
-  `section`) used throughout
+- Semantic landmarks (`header`, `main`, `section`, `footer`) used throughout

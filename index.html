@@ -3,312 +3,326 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>abu-huraira — ~/portfolio</title>
-  <meta name="description" content="Abu-Huraira's portfolio, presented as a code editor: about.md, journey.log, skills.json, projects/, contact.sh." />
-  <meta name="theme-color" content="#1e1e1e" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231e1e1e'/%3E%3Ctext x='50' y='72' font-size='60' font-family='monospace' font-weight='700' fill='%23569cd6' text-anchor='middle'%3E%3C%2F%3E%3C%2Ftext%3E%3C%2Fsvg%3E" />
+  <title>Abu&ndash;Huraira &mdash; Liner Notes</title>
+  <meta name="description" content="Abu-Huraira's portfolio, presented as an album's liner notes: an honest track-by-track account of a 19-year-old undergraduate learning to build with AI-assisted development tools." />
+  <meta name="theme-color" content="#f2e9d8" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2e9d8'/%3E%3Ctext x='50' y='72' font-size='60' font-family='Georgia' font-weight='700' fill='%23b5502e' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ============ Title bar ============ -->
-  <div class="titlebar">
-    <div class="titlebar-dots">
-      <span class="dot-red"></span>
-      <span class="dot-yellow"></span>
-      <span class="dot-green"></span>
-    </div>
-    <span class="titlebar-title">abu-huraira — ~/portfolio — VS Code</span>
-    <nav class="titlebar-actions">
-      <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer">github</a>
-      <a href="#contact-sh">contact</a>
-    </nav>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="onboard-banner" id="onboard-banner">
+    <span>👋 <strong>Just a portfolio, dressed up like liner notes.</strong> Scroll down to read about me &mdash; no music-industry knowledge needed.</span>
+    <button class="onboard-close" id="onboard-close" aria-label="Dismiss this message" type="button">&times;</button>
   </div>
 
-  <div class="app">
-    <div class="onboard-banner" id="onboard-banner">
-      <span>👋 <strong>No coding knowledge needed.</strong> This page is just styled like a code editor for fun — click a name on the left, or scroll down, to read about me.</span>
-      <button class="onboard-close" id="onboard-close" aria-label="Dismiss this message" type="button">&times;</button>
-    </div>
-
-    <!-- ============ Sidebar / file explorer ============ -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-section-label">Explorer</div>
-      <nav class="file-tree" id="file-tree">
-        <a href="#about-md" class="file-item is-active" data-file="about-md">
-          <span class="file-icon icon-md">◆</span> about.md <span class="file-plain">— About Me</span>
-        </a>
-        <a href="#journey-log" class="file-item" data-file="journey-log">
-          <span class="file-icon icon-log">▤</span> journey.log <span class="file-plain">— My Story</span>
-        </a>
-        <a href="#skills-json" class="file-item" data-file="skills-json">
-          <span class="file-icon icon-json">{ }</span> skills.json <span class="file-plain">— Skills</span>
-        </a>
-        <a href="#projects-dir" class="file-item" data-file="projects-dir">
-          <span class="file-icon icon-dir">▸</span> projects/ <span class="file-plain">— My Work</span>
-        </a>
-        <a href="#contact-sh" class="file-item" data-file="contact-sh">
-          <span class="file-icon icon-sh">$</span> contact.sh <span class="file-plain">— Contact</span>
-        </a>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="#hero" class="mark">Abu&ndash;Huraira <span>&middot;</span></a>
+      <nav class="masthead-nav">
+        <a href="#about">About</a>
+        <a href="#journey">Journey</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <div class="sidebar-git">
-        <div>Status: <strong>in progress</strong></div>
-        <div>Next up: a new project</div>
-      </div>
-    </aside>
-
-    <!-- ============ Editor area ============ -->
-    <div class="editor">
-
-      <!-- Tab bar -->
-      <div class="tabbar">
-        <button class="mobile-menu-btn" id="menu-btn" aria-label="Toggle file explorer">☰</button>
-        <a href="#about-md" class="tab is-active" data-file="about-md"><span class="file-icon icon-md">◆</span> About Me</a>
-        <a href="#journey-log" class="tab" data-file="journey-log"><span class="file-icon icon-log">▤</span> My Story</a>
-        <a href="#skills-json" class="tab" data-file="skills-json"><span class="file-icon icon-json">{ }</span> Skills</a>
-        <a href="#projects-dir" class="tab" data-file="projects-dir"><span class="file-icon icon-dir">▸</span> My Work</a>
-        <a href="#contact-sh" class="tab" data-file="contact-sh"><span class="file-icon icon-sh">$</span> Contact</a>
-      </div>
-
-      <main>
-
-        <!-- ============ about.md ============ -->
-        <section id="about-md" class="pane" data-file="about-md" data-title="about.md">
-          <div class="gutter" aria-hidden="true">
-            <span class="hl">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-            <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
-          </div>
-          <div class="code">
-            <div class="term-window reveal">
-              <div class="term-bar">
-                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-              </div>
-              <div class="term-body" id="term-body">
-                <!-- filled by JS typing sequence -->
-              </div>
-            </div>
-
-            <h1 class="md-h1 reveal" style="--d:60ms">Abu&ndash;Huraira</h1>
-            <p class="prose reveal" style="--d:100ms">
-              19 years old. Undergraduate. Self-taught.<br />
-              Currently learning to build with AI-assisted development tools.
-            </p>
-
-            <h2 class="md-h2 reveal">Why I'm being this upfront</h2>
-            <p class="prose reveal">
-              Because that's honestly what this is. I don't have a long résumé
-              of finished, client-tested work &mdash; what I have is momentum,
-              curiosity, and a habit of actually finishing what I start. I'd
-              rather document that honestly than dress it up.
-            </p>
-            <p class="prose reveal" style="--d:60ms">
-              Before this, I spent time exploring different corners of the
-              internet, including some short-lived crypto/airdrop projects.
-              They taught me things, but weren't a direction worth building a
-              future on. What stuck was building things with
-              <strong>AI-assisted development tools</strong> &mdash; planning
-              a project, breaking it into steps, and actually shipping it.
-            </p>
-
-            <h2 class="md-h2 reveal">Right now</h2>
-            <p class="prose reveal">
-              <strong>Status:</strong> open to opportunities.<br />
-              <strong>Looking for:</strong> an internship, an entry-level role, or a collaboration.
-            </p>
-          </div>
-        </section>
-
-        <!-- ============ journey.log ============ -->
-        <section id="journey-log" class="pane" data-file="journey-log" data-title="journey.log">
-          <div class="gutter" aria-hidden="true">
-            <span class="hl">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-          </div>
-          <div class="code">
-            <p class="prose reveal" style="margin-bottom:2rem;">A quick timeline of how I got here &mdash; kept honest on purpose.</p>
-
-            <div class="commit reveal">
-              <div><span class="commit-hash">2024</span></div>
-              <div class="commit-msg">Finished school, no fixed roadmap yet</div>
-              <div class="commit-body">Stepped into an open period. Spent time exploring instead of committing early to a path that didn't feel true yet.</div>
-            </div>
-
-            <div class="commit reveal" style="--d:80ms">
-              <div><span class="commit-hash">2024&ndash;25</span></div>
-              <div class="commit-msg">Explored, and ruled things out</div>
-              <div class="commit-body">Tried a handful of online spaces, including crypto/airdrop projects. Useful lessons, not a direction worth building a future around.</div>
-            </div>
-
-            <div class="commit is-head reveal" style="--d:160ms">
-              <div><span class="commit-hash">Now</span><span class="commit-refs">current</span></div>
-              <div class="commit-msg">Building with AI-assisted tools, on purpose</div>
-              <div class="commit-body">Learning to plan, structure, and ship real projects. This site being the clearest example so far &mdash; slow, deliberate, and actually mine.</div>
-            </div>
-
-            <div class="commit reveal" style="--d:240ms">
-              <div><span class="commit-hash">Next</span></div>
-              <div class="commit-msg">Looking for a way in</div>
-              <div class="commit-body">An internship, an entry-level role, or a collaboration &mdash; something that turns self-directed momentum into real-world practice.</div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============ skills.json ============ -->
-        <section id="skills-json" class="pane" data-file="skills-json" data-title="skills.json">
-          <div class="gutter" aria-hidden="true">
-            <span class="hl">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-            <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
-            <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
-          </div>
-          <div class="code">
-            <p class="prose reveal" style="margin-bottom: 1.75rem;">No invented percentages or skill bars here &mdash; just what's actually true.</p>
-
-            <div class="skill-plain-group reveal">
-              <h3 class="skill-plain-label">Currently learning</h3>
-              <ul class="skill-plain-list">
-                <li>AI-assisted development</li>
-                <li>HTML / CSS / JavaScript, through real projects</li>
-                <li>Breaking problems into clear steps</li>
-              </ul>
-            </div>
-
-            <div class="skill-plain-group reveal" style="--d:80ms">
-              <h3 class="skill-plain-label">Comfortable with</h3>
-              <ul class="skill-plain-list">
-                <li>Reading documentation and figuring things out on my own</li>
-                <li>Starting from zero with a brand-new tool</li>
-                <li>Breaking unfamiliar problems into small steps</li>
-              </ul>
-            </div>
-
-            <div class="skill-plain-group reveal" style="--d:160ms">
-              <h3 class="skill-plain-label">How I work</h3>
-              <ul class="skill-plain-list">
-                <li>Follow-through &mdash; I finish what I start</li>
-                <li>Adaptable &mdash; comfortable learning new things quickly</li>
-                <li>Honest about what I don't know yet</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============ projects/ ============ -->
-        <section id="projects-dir" class="pane" data-file="projects-dir" data-title="index.tsx">
-          <div class="gutter" aria-hidden="true">
-            <span class="hl">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-          </div>
-          <div class="code">
-            <p class="prose reveal" style="margin-bottom:2rem;">Things I've actually built, listed honestly by status.</p>
-
-            <div class="project-block reveal">
-              <div class="project-block-head">
-                <span>./projects/this-notebook</span>
-                <span class="status-badge status-live">live</span>
-              </div>
-              <div class="project-block-body">
-                <span class="diff-add">Built a portfolio that looks like a code editor, from scratch.</span>
-                <h3 class="project-title">This Site</h3>
-                <p class="project-desc">Planned, structured, and built with AI-assisted development as the primary method &mdash; not a template. Editor chrome, tabs, a git-log journey, JSON-styled skills.</p>
-                <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-                <a href="https://github.com/Rafljmhfghi69/Portfolio-" target="_blank" rel="noopener noreferrer" class="project-link">view source &rarr;</a>
-              </div>
-            </div>
-
-            <div class="project-block reveal" style="--d:80ms">
-              <div class="project-block-head">
-                <span>./projects/next-one</span>
-                <span class="status-badge status-progress">in progress</span>
-              </div>
-              <div class="project-block-body">
-                <h3 class="project-title">The Next Entry</h3>
-                <p class="project-desc">Actively learning and building. This entry gets replaced when it's actually finished &mdash; not before.</p>
-                <div class="project-tags"><span>TBD</span></div>
-              </div>
-            </div>
-
-            <div class="project-block reveal" style="--d:160ms">
-              <div class="project-block-head">
-                <span>./projects/reserved</span>
-                <span class="status-badge status-planned">planned</span>
-              </div>
-              <div class="project-block-body">
-                <h3 class="project-title">Reserved</h3>
-                <p class="project-desc">A placeholder, kept honest on purpose. Nothing here yet &mdash; check back as real work happens.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ============ contact.sh ============ -->
-        <section id="contact-sh" class="pane" data-file="contact-sh" data-title="contact.sh">
-          <div class="gutter" aria-hidden="true">
-            <span class="hl">1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-          </div>
-          <div class="code">
-            <p class="prose reveal" style="margin-bottom:1.75rem;">
-              Fill in the form below, or use the links underneath it &mdash; whichever is easier.
-            </p>
-
-            <div class="shell-window reveal">
-              <div class="term-bar">
-                <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
-                <span style="font-size:0.75rem; color: var(--text-dim); margin-left: 0.5rem;">bash &mdash; contact.sh</span>
-              </div>
-              <form class="shell-form" id="contact-form" data-mailto="youremail@example.com">
-                <div class="shell-field">
-                  <label for="name" class="shell-field-label">name</label>
-                  <input type="text" id="name" name="name" required />
-                </div>
-                <div class="shell-field">
-                  <label for="email" class="shell-field-label">email</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div class="shell-field">
-                  <label for="message" class="shell-field-label">message</label>
-                  <textarea id="message" name="message" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="shell-run-btn">Send Message</button>
-                <p class="shell-status" id="form-status"></p>
-              </form>
-
-              <div class="contact-links-inline" style="padding: 0 1.5rem 1.5rem;">
-                <a href="mailto:youremail@example.com">Email &rarr; youremail@example.com</a>
-                <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer">GitHub &rarr; @Rafljmhfghi69</a>
-                <a href="#">LinkedIn &rarr; add your profile link</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <!-- ============ Status bar ============ -->
-      <div class="statusbar">
-        <div class="statusbar-left">
-          <span>⎇ main</span>
-          <span id="status-file">about.md</span>
-          <span>UTF-8</span>
-        </div>
-        <div class="statusbar-right">
-          <span>&copy; <span id="year"></span> Abu&ndash;Huraira</span>
-        </div>
-      </div>
-
+      <span class="masthead-meta mono">Side&nbsp;A &mdash; 2026</span>
     </div>
-  </div>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero wrap">
+      <span class="hero-tape">side A, track 01</span>
+
+      <div class="hero-kicker reveal">
+        <span class="rec-dot"></span>
+        <span class="eyebrow">Now playing &mdash; my own liner notes</span>
+      </div>
+
+      <h1 class="hero-title reveal" style="--d:80ms">
+        Notes from <em>zero</em>, played honestly.
+      </h1>
+
+      <div class="waveform reveal" id="waveform" style="--d:140ms" aria-hidden="true"></div>
+
+      <p class="hero-sub reveal" style="--d:200ms">
+        I'm Abu&ndash;Huraira. 19. An undergraduate teaching myself to build
+        with AI-assisted tools, one honest attempt at a time. No polished
+        highlight reel here &mdash; just the real track listing so far.
+      </p>
+
+      <div class="hero-actions reveal" style="--d:260ms">
+        <a href="#projects" class="btn btn-solid">Play the tracklist &rarr;</a>
+        <a href="#contact" class="btn btn-outline">Request a song</a>
+      </div>
+
+      <div class="hero-facts reveal" style="--d:320ms">
+        <span><strong>Status</strong> &mdash; Open to opportunities</span>
+        <span><strong>Method</strong> &mdash; Self-taught</span>
+        <span><strong>Currently</strong> &mdash; AI-assisted development</span>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT — Track 01 ============ -->
+    <section id="about" class="track wrap">
+      <div class="track-head reveal">
+        <div>
+          <span class="track-num mono">Track 01</span>
+          <h2 class="track-title">About Me</h2>
+        </div>
+        <span class="track-duration">reading time &mdash; 1:40</span>
+      </div>
+
+      <div class="liner-grid">
+        <div class="liner-copy reveal">
+          <p class="drop">
+            Most portfolios open with a confident summary of expertise.
+            Mine won't, because it wouldn't be honest. I'm early. I don't
+            have a long list of finished, client-tested work &mdash; what I
+            have is momentum, curiosity, and a habit of actually finishing
+            what I start.
+          </p>
+          <p>
+            Before this, I spent time exploring different corners of the
+            internet &mdash; including some short-lived crypto/airdrop
+            projects that taught me things but weren't a direction I
+            wanted to build a future on. What stuck was building things
+            with <strong>AI-assisted development tools</strong> &mdash;
+            planning a project, breaking it into steps, and actually
+            shipping it.
+          </p>
+          <p>
+            I'm not interested in performing confidence I don't have yet.
+            I'd rather be specific about where I am, and let the work speak
+            for the trajectory.
+          </p>
+        </div>
+
+        <div class="liner-margin reveal" style="--d:120ms">
+          <div class="liner-card">
+            <div class="liner-card-label mono">Age</div>
+            <div class="liner-card-value">19</div>
+          </div>
+          <div class="liner-card">
+            <div class="liner-card-label mono">Education</div>
+            <div class="liner-card-value">Undergraduate</div>
+          </div>
+          <div class="liner-card">
+            <div class="liner-card-label mono">Method</div>
+            <div class="liner-card-value">Self-taught, learning in public</div>
+          </div>
+          <div class="liner-card">
+            <div class="liner-card-label mono">Currently</div>
+            <div class="liner-card-value">AI-assisted development</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ JOURNEY — B-Side ============ -->
+    <section id="journey" class="track wrap">
+      <div class="track-head reveal">
+        <div>
+          <span class="track-num mono">Track 02</span>
+          <h2 class="track-title">My Story, So Far</h2>
+        </div>
+        <span class="track-duration">a dated record, kept honest</span>
+      </div>
+
+      <div class="bside-list">
+        <div class="bside-item reveal">
+          <span class="bside-time mono">2024</span>
+          <div class="bside-body">
+            <h3>Finished school, no fixed roadmap yet</h3>
+            <p>Stepped into an open period. Spent time exploring instead of committing early to a path that didn't feel true yet.</p>
+          </div>
+        </div>
+        <div class="bside-item reveal" style="--d:80ms">
+          <span class="bside-time mono">2024&ndash;25</span>
+          <div class="bside-body">
+            <h3>Explored, and ruled things out</h3>
+            <p>Tried a handful of online spaces, including crypto/airdrop projects. Useful lessons &mdash; not a direction worth building a future around, and I'm not pretending otherwise.</p>
+          </div>
+        </div>
+        <div class="bside-item is-now reveal" style="--d:160ms">
+          <span class="bside-time mono">Now</span>
+          <div class="bside-body">
+            <h3>Building with AI-assisted tools, on purpose</h3>
+            <p>Learning to plan, structure, and ship real projects &mdash; this site being the clearest example so far. Slow, deliberate, and actually mine.</p>
+          </div>
+        </div>
+        <div class="bside-item reveal" style="--d:240ms">
+          <span class="bside-time mono">Next</span>
+          <div class="bside-body">
+            <h3>Looking for a way in</h3>
+            <p>An internship, an entry-level role, or a collaboration &mdash; something that turns self-directed momentum into real-world practice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS — Liner Note Credits ============ -->
+    <section id="skills" class="track wrap">
+      <div class="track-head reveal">
+        <div>
+          <span class="track-num mono">Track 03</span>
+          <h2 class="track-title">Credits</h2>
+        </div>
+        <span class="track-duration">no invented percentages, promise</span>
+      </div>
+
+      <div class="credits-list">
+        <div class="credit-item reveal">
+          <span class="credit-role mono">Currently learning</span>
+          <h3 class="credit-name">AI-assisted development</h3>
+          <p class="credit-desc">Planning and shipping real, working projects using modern AI-powered tools as a genuine collaborator.</p>
+        </div>
+        <div class="credit-item reveal" style="--d:60ms">
+          <span class="credit-role mono">Currently learning</span>
+          <h3 class="credit-name">Web fundamentals</h3>
+          <p class="credit-desc">HTML, CSS, and JavaScript, built up through actual projects rather than tutorials alone.</p>
+        </div>
+        <div class="credit-item reveal" style="--d:120ms">
+          <span class="credit-role mono">Comfortable with</span>
+          <h3 class="credit-name">Self-direction</h3>
+          <p class="credit-desc">Reading documentation and figuring things out without being told how.</p>
+        </div>
+        <div class="credit-item reveal" style="--d:180ms">
+          <span class="credit-role mono">Comfortable with</span>
+          <h3 class="credit-name">Problem decomposition</h3>
+          <p class="credit-desc">Breaking unfamiliar problems into small, testable steps instead of freezing.</p>
+        </div>
+        <div class="credit-item reveal" style="--d:240ms">
+          <span class="credit-role mono">How I work</span>
+          <h3 class="credit-name">Adaptability</h3>
+          <p class="credit-desc">Genuinely comfortable starting from zero with a new tool &mdash; this site is itself an example.</p>
+        </div>
+        <div class="credit-item reveal" style="--d:300ms">
+          <span class="credit-role mono">How I work</span>
+          <h3 class="credit-name">Follow-through</h3>
+          <p class="credit-desc">Consistency without external pressure &mdash; showing up and finishing, not just starting things.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS — Tracklist ============ -->
+    <section id="projects" class="track wrap">
+      <div class="track-head reveal">
+        <div>
+          <span class="track-num mono">Track 04</span>
+          <h2 class="track-title">The Tracklist</h2>
+        </div>
+        <span class="track-duration">things actually built, listed honestly</span>
+      </div>
+
+      <div class="tracklist">
+        <div class="track-row reveal">
+          <span class="track-row-num mono">01</span>
+          <div class="track-row-info">
+            <h3>This Site</h3>
+            <p>A from-scratch portfolio, styled as liner notes &mdash; planned, structured, and built with AI-assisted development as the primary method, not a template.</p>
+            <div class="track-row-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a href="https://github.com/Rafljmhfghi69/Portfolio-" target="_blank" rel="noopener noreferrer" class="track-row-link">View source &rarr;</a>
+          </div>
+          <span class="track-row-status status-live">live</span>
+        </div>
+
+        <div class="track-row reveal" style="--d:80ms">
+          <span class="track-row-num mono">02</span>
+          <div class="track-row-info">
+            <h3>The Next One</h3>
+            <p>Actively learning and building. This slot gets replaced when it's actually finished &mdash; not before.</p>
+          </div>
+          <span class="track-row-status status-progress">in progress</span>
+        </div>
+
+        <div class="track-row reveal" style="--d:160ms">
+          <span class="track-row-num mono">03</span>
+          <div class="track-row-info">
+            <h3>Reserved</h3>
+            <p>A placeholder, kept honest on purpose. Nothing here yet &mdash; check back as real work happens.</p>
+          </div>
+          <span class="track-row-status status-planned">planned</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STANCE — pull quote ============ -->
+    <section id="stance" class="pull wrap">
+      <div class="eyebrow reveal" style="margin-bottom: 1.25rem;">Liner note</div>
+      <blockquote class="reveal" style="--d:80ms">
+        I'd rather be <em>honestly early</em> than perform an expertise I haven't earned yet.
+      </blockquote>
+      <cite class="reveal" style="--d:160ms">&mdash; Abu&ndash;Huraira</cite>
+    </section>
+
+    <!-- ============ CONTACT — Request a Song ============ -->
+    <section id="contact" class="track wrap">
+      <div class="track-head reveal">
+        <div>
+          <span class="track-num mono">Track 05</span>
+          <h2 class="track-title">Request a Song</h2>
+        </div>
+        <span class="track-duration">how to reach me</span>
+      </div>
+
+      <div class="request-grid">
+        <form class="request-form reveal" id="contact-form" data-mailto="youremail@example.com">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-solid" style="align-self:flex-start;">Send it over &rarr;</button>
+          <p class="form-status mono" id="form-status"></p>
+        </form>
+
+        <div class="request-info reveal" style="--d:120ms">
+          <div>
+            <div class="info-label mono">Email</div>
+            <a href="mailto:youremail@example.com" class="info-link">youremail@example.com</a>
+          </div>
+          <div>
+            <div class="info-label mono">GitHub</div>
+            <a href="https://github.com/Rafljmhfghi69" target="_blank" rel="noopener noreferrer" class="info-link">@Rafljmhfghi69</a>
+          </div>
+          <div>
+            <div class="info-label mono">LinkedIn</div>
+            <a href="#" class="info-link">Add your profile link</a>
+          </div>
+
+          <div class="request-print mono">
+            Set in Fraunces &amp; Instrument Sans, with Space Mono for track numbers.<br />
+            No stock photography. No fabricated testimonials or streaming stats.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer-strip wrap">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Abu&ndash;Huraira &mdash; Liner Notes</span>
+      <span>Side A &mdash; End of tracklist</span>
+    </div>
+  </footer>
 
   <script src="js/main.js"></script>
 </body>

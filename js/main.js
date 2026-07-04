@@ -1,7 +1,7 @@
 /* =========================================================================
-   ABU-HURAIRA — ~/portfolio
-   main.js — terminal typing sequence, tab/file switching, reveal-on-scroll,
-   contact form, status bar sync
+   ABU-HURAIRA — Liner Notes
+   main.js — waveform generation, onboarding banner, reveal-on-scroll,
+   contact form, footer year
    ========================================================================= */
 
 (function () {
@@ -12,19 +12,10 @@
   ).matches;
 
   /* ---------------------------------------------------------------------
-     0. Onboarding banner — plain-language helper for non-technical visitors
+     1. Onboarding banner — dismissible, remembered via localStorage
      ------------------------------------------------------------------- */
   var banner = document.getElementById("onboard-banner");
   var bannerClose = document.getElementById("onboard-close");
-  var root = document.documentElement;
-
-  function syncBannerHeight() {
-    if (banner && !banner.classList.contains("is-hidden")) {
-      root.style.setProperty("--banner-h", banner.offsetHeight + "px");
-    } else {
-      root.style.setProperty("--banner-h", "0px");
-    }
-  }
 
   if (banner && bannerClose) {
     var dismissed = false;
@@ -45,205 +36,56 @@
       } catch (e) {
         /* ignore */
       }
-      setTimeout(syncBannerHeight, 350);
     });
-
-    window.addEventListener("resize", syncBannerHeight);
-    window.addEventListener("load", syncBannerHeight);
-    syncBannerHeight();
   }
 
   /* ---------------------------------------------------------------------
-     1. Terminal typing sequence (about.md hero)
+     2. Waveform hero — generated bars with a gentle idle animation
      ------------------------------------------------------------------- */
-  var termBody = document.getElementById("term-body");
+  var waveform = document.getElementById("waveform");
 
-  var termScript = [
-    { type: "cmd", prompt: "abu@dev ~", text: "whoami" },
-    { type: "out", text: "Abu-Huraira — 19 — undergraduate — self-taught" },
-    { type: "cmd", prompt: "abu@dev ~", text: "cat status.txt" },
-    {
-      type: "out",
-      text: "Learning to build with AI-assisted development tools.",
-      accent: true,
-    },
-    { type: "cmd", prompt: "abu@dev ~", text: "./run.sh --intro" },
-    { type: "out", text: "Welcome. Scroll down, or open a file on the left." },
-  ];
+  if (waveform) {
+    var barCount = window.innerWidth < 640 ? 42 : 72;
+    var bars = [];
 
-  function renderStaticTerminal() {
-    var html = "";
-    termScript.forEach(function (line) {
-      if (line.type === "cmd") {
-        html +=
-          '<div class="term-line"><span class="term-prompt">' +
-          line.prompt +
-          '$</span><span class="term-cmd">' +
-          line.text +
-          "</span></div>";
-      } else {
-        html +=
-          '<div class="term-output' +
-          (line.accent ? " accent-out" : "") +
-          '">' +
-          line.text +
-          "</div>";
-      }
-    });
-    termBody.innerHTML = html;
-  }
+    for (var i = 0; i < barCount; i++) {
+      var bar = document.createElement("span");
+      bar.className = "bar";
+      // deterministic-ish pseudo-random height pattern (sine + noise)
+      var base = Math.sin(i * 0.35) * 0.5 + 0.5; // 0..1
+      var noise = Math.sin(i * 1.7) * 0.15;
+      var heightPct = Math.max(0.12, Math.min(1, base + noise));
+      var heightPx = 10 + heightPct * 54;
+      bar.style.height = heightPx.toFixed(1) + "px";
+      waveform.appendChild(bar);
+      bars.push(bar);
+    }
 
-  function typeTerminal() {
-    var lineIndex = 0;
-    var charIndex = 0;
-    var container = document.createElement("div");
-    termBody.innerHTML = "";
-    termBody.appendChild(container);
+    if (!prefersReducedMotion) {
+      var start = null;
 
-    function nextLine() {
-      if (lineIndex >= termScript.length) {
-        var cursor = document.createElement("span");
-        cursor.className = "cursor-block";
-        container.appendChild(cursor);
-        return;
-      }
+      function animateWave(ts) {
+        if (start === null) start = ts;
+        var elapsed = (ts - start) / 1000;
 
-      var line = termScript[lineIndex];
-      var lineEl = document.createElement("div");
-
-      if (line.type === "cmd") {
-        lineEl.className = "term-line";
-        var promptSpan = document.createElement("span");
-        promptSpan.className = "term-prompt";
-        promptSpan.textContent = line.prompt + "$";
-        var cmdSpan = document.createElement("span");
-        cmdSpan.className = "term-cmd";
-        lineEl.appendChild(promptSpan);
-        lineEl.appendChild(cmdSpan);
-        container.appendChild(lineEl);
-        charIndex = 0;
-
-        function typeChar() {
-          if (charIndex <= line.text.length) {
-            cmdSpan.textContent = line.text.slice(0, charIndex);
-            charIndex++;
-            setTimeout(typeChar, 32);
-          } else {
-            lineIndex++;
-            setTimeout(nextLine, 260);
-          }
-        }
-        typeChar();
-      } else {
-        lineEl.className = "term-output" + (line.accent ? " accent-out" : "");
-        lineEl.textContent = line.text;
-        lineEl.style.opacity = "0";
-        container.appendChild(lineEl);
-        requestAnimationFrame(function () {
-          lineEl.style.transition = "opacity 0.3s";
-          lineEl.style.opacity = "1";
+        bars.forEach(function (bar, i) {
+          var base = Math.sin(i * 0.35) * 0.5 + 0.5;
+          var noise = Math.sin(i * 1.7) * 0.15;
+          var wobble = Math.sin(elapsed * 1.6 + i * 0.4) * 0.12;
+          var heightPct = Math.max(0.1, Math.min(1, base + noise + wobble));
+          var heightPx = 10 + heightPct * 54;
+          bar.style.height = heightPx.toFixed(1) + "px";
         });
-        lineIndex++;
-        setTimeout(nextLine, 420);
+
+        requestAnimationFrame(animateWave);
       }
-    }
 
-    nextLine();
-  }
-
-  if (termBody) {
-    if (prefersReducedMotion) {
-      renderStaticTerminal();
-    } else {
-      typeTerminal();
+      requestAnimationFrame(animateWave);
     }
   }
 
   /* ---------------------------------------------------------------------
-     2. File tab / sidebar switching + active state sync
-     ------------------------------------------------------------------- */
-  var panes = Array.prototype.slice.call(document.querySelectorAll(".pane"));
-  var fileLinks = Array.prototype.slice.call(
-    document.querySelectorAll(".file-item, .tab")
-  );
-  var statusFile = document.getElementById("status-file");
-  var titlebarTitle = document.querySelector(".titlebar-title");
-
-  function setActiveFile(fileKey) {
-    fileLinks.forEach(function (link) {
-      link.classList.toggle(
-        "is-active",
-        link.getAttribute("data-file") === fileKey
-      );
-    });
-
-    var pane = panes.filter(function (p) {
-      return p.getAttribute("data-file") === fileKey;
-    })[0];
-
-    if (pane && statusFile) {
-      statusFile.textContent = pane.getAttribute("data-title") || fileKey;
-    }
-    if (pane && titlebarTitle) {
-      titlebarTitle.textContent =
-        "abu-huraira — ~/portfolio — " + (pane.getAttribute("data-title") || fileKey);
-    }
-  }
-
-  fileLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      var fileKey = link.getAttribute("data-file");
-      setActiveFile(fileKey);
-      // close mobile sidebar after choosing a file
-      var sidebar = document.getElementById("sidebar");
-      if (sidebar && window.innerWidth < 900) {
-        sidebar.classList.add("is-closed");
-      }
-    });
-  });
-
-  if ("IntersectionObserver" in window && panes.length) {
-    var paneObserver = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            setActiveFile(entry.target.getAttribute("data-file"));
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    panes.forEach(function (pane) {
-      paneObserver.observe(pane);
-    });
-  }
-
-  /* ---------------------------------------------------------------------
-     3. Mobile sidebar toggle
-     ------------------------------------------------------------------- */
-  var menuBtn = document.getElementById("menu-btn");
-  var sidebarEl = document.getElementById("sidebar");
-
-  if (menuBtn && sidebarEl) {
-    sidebarEl.classList.add("is-closed");
-
-    menuBtn.addEventListener("click", function () {
-      sidebarEl.classList.toggle("is-closed");
-    });
-
-    function syncSidebarForWidth() {
-      if (window.innerWidth >= 900) {
-        sidebarEl.classList.remove("is-closed");
-      } else {
-        sidebarEl.classList.add("is-closed");
-      }
-    }
-    window.addEventListener("resize", syncSidebarForWidth);
-    syncSidebarForWidth();
-  }
-
-  /* ---------------------------------------------------------------------
-     4. Reveal-on-scroll
+     3. Reveal-on-scroll
      ------------------------------------------------------------------- */
   var revealEls = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
@@ -256,7 +98,7 @@
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
     );
     revealEls.forEach(function (el) {
       revealObserver.observe(el);
@@ -268,7 +110,7 @@
   }
 
   /* ---------------------------------------------------------------------
-     5. Contact form — validation + mailto handoff
+     4. Contact form — validation + mailto handoff
      ------------------------------------------------------------------- */
   var contactForm = document.getElementById("contact-form");
   var formStatus = document.getElementById("form-status");
@@ -284,13 +126,13 @@
 
       if (!name || !email || !message) {
         formStatus.textContent = "Please fill in every field before sending.";
-        formStatus.style.color = "#f14c4c";
+        formStatus.style.color = "#b5502e";
         return;
       }
 
       if (!emailPattern.test(email)) {
         formStatus.textContent = "That email address doesn't look right — please check it.";
-        formStatus.style.color = "#f14c4c";
+        formStatus.style.color = "#b5502e";
         return;
       }
 
@@ -304,14 +146,14 @@
       window.location.href =
         "mailto:" + mailLink + "?subject=" + subject + "&body=" + body;
 
-      formStatus.style.color = "#7ee787";
+      formStatus.style.color = "#5c6b2c";
       formStatus.textContent = "Opening your email app now — thanks for writing!";
       contactForm.reset();
     });
   }
 
   /* ---------------------------------------------------------------------
-     6. Footer / status bar year
+     5. Footer year
      ------------------------------------------------------------------- */
   var yearSpan = document.getElementById("year");
   if (yearSpan) {
