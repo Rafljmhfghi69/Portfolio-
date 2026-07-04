@@ -1,34 +1,34 @@
-# Abu&ndash;Huraira — Liner Notes
+# Abu&ndash;Huraira — Now Exhibiting
 
-A personal site presented as an **album's liner notes**, not a conventional
-tech portfolio. Plain HTML, CSS, and JavaScript &mdash; no frameworks, no
-build tools, no dependencies to install.
+A personal site presented as a **small museum exhibition**, not a
+conventional tech portfolio. Plain HTML, CSS, and JavaScript &mdash; no
+frameworks, no build tools, no dependencies to install.
 
 ## Concept
 
-A warm, "acoustic" alternative to the cold, digital look of a typical dev
-portfolio:
+A clean, gallery-style alternative designed to be immediately legible to
+any visitor, technical or not:
 
-- **Kraft-paper and cream tones** instead of dark mode or bright gradients
-- A **generated waveform** in the hero, gently animating like an idle audio
-  track
-- A **cassette-tape label** sticker in the corner of the hero
-- Content organized like an actual album, track by track:
-  - **Track 01 &mdash; About Me** (liner notes, with a drop-cap opening line)
-  - **Track 02 &mdash; My Story, So Far** (a dated B-side history)
-  - **Track 03 &mdash; Credits** (skills, framed as album credits &mdash; no
-    invented percentages)
-  - **Track 04 &mdash; The Tracklist** (projects, listed like album tracks
-    with status badges: live / in progress / planned)
-  - A liner-note **pull quote**
-  - **Track 05 &mdash; Request a Song** (the contact section)
-- Dashed "perforated" section dividers, tilted sticky-note style cards, and
-  warm serif + hand-lettered display type (Fraunces + Caveat)
-- A friendly, dismissible onboarding banner so non-technical visitors
-  immediately understand it's "just a portfolio dressed up"
+- **White gallery-wall background**, generous whitespace, hairline rules
+- Content organized as **numbered exhibits**, each with a small plaque
+  label (like a museum wall tag):
+  - **Exhibit I &mdash; About Me** (with a drop-cap opening line and a
+    small fact plaque)
+  - **Exhibit II &mdash; My Story, So Far** (a dated timeline)
+  - **Exhibit III &mdash; Curatorial Notes** (skills, framed as curator's
+    notes &mdash; no invented percentages)
+  - **Exhibit IV &mdash; The Catalog** (projects, listed with status tags:
+    On display / In progress / Coming soon)
+  - A **Curator's Note** pull quote
+  - **Exhibit V &mdash; Sign the Visitor Book** (the contact section)
+- Elegant serif display type (Cormorant Garamond) paired with a clean,
+  highly legible sans body font (Inter) and small monospace labels (IBM
+  Plex Mono) for plaque-style captions
+- A friendly, dismissible onboarding banner so any visitor immediately
+  understands it's "just a portfolio, styled like a small exhibition"
 
 Content is intentionally honest: no invented skill percentages, no
-fabricated testimonials or streaming stats, no exaggerated bio.
+fabricated testimonials or visitor counts, no exaggerated bio.
 
 ## Structure
 
@@ -36,9 +36,9 @@ fabricated testimonials or streaming stats, no exaggerated bio.
 Portfolio-/
 ├── index.html         # All page markup and content
 ├── css/
-│   └── style.css      # Full acoustic/warm design system
+│   └── style.css      # Full gallery/exhibition design system
 ├── js/
-│   └── main.js         # Waveform animation, reveal-on-scroll, contact form
+│   └── main.js         # Reveal-on-scroll, contact form, nav highlighting
 └── README.md
 ```
 
@@ -69,15 +69,13 @@ Then visit `http://localhost:8000`.
   and the LinkedIn `#` link in the `contact` section, and update the
   `data-mailto` attribute on `#contact-form`
 - **Palette** — edit the CSS variables at the top of `css/style.css`
-  (`--paper`, `--ink`, `--accent`, `--wave`, `--tape`)
-- **Waveform** — tweak the bar-count and animation parameters in the
-  waveform section of `js/main.js`
-- **Projects** — duplicate a `.track-row` block in the tracklist section as
+  (`--wall`, `--ink`, `--accent`, `--brass`)
+- **Projects** — duplicate a `.catalog-row` block in the catalog section as
   new projects are actually finished; update the `status-*` class
 
 ## Accessibility & Performance Notes
 
-- Waveform idle animation is skipped (renders as a static pattern) when
-  `prefers-reduced-motion: reduce` is set
 - No external image hotlinking &mdash; the whole design is typographic/CSS
+- All animations respect `prefers-reduced-motion: reduce`
 - Semantic landmarks (`header`, `main`, `section`, `footer`) used throughout
+- High-contrast, legible typography prioritized over visual gimmicks
